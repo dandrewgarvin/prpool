@@ -5,6 +5,7 @@
   "engines": {
     "node": ">=14.0.0"
   },
+  "main": "dist/server.js",
   "scripts": {
     "build": "npm run build-ts && npm run lint",
     "build-ts": "rm -rf dist && tsc -p tsconfig.prod.json",
@@ -19,7 +20,7 @@
     "watch-node": "nodemon dist/server.js",
     "watch-test": "npm run test -- --watch",
     "watch-ts": "tsc -w -p tsconfig.json",
-    "heroku-postbuild": "echo Skip build on Heroku"
+    "heroku-postbuild": "npm run build-ts"
   },
   "dependencies": {
     "compression": "^1.7.4",
@@ -36,7 +37,7 @@
     "@types/express": "^4.17.1",
     "@types/jest": "^24.0.23",
     "@types/lusca": "^1.6.1",
-    "@types/node": "^12.7.8",
+    "@types/node": "^12.20.11",
     "@types/supertest": "^2.0.8",
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
