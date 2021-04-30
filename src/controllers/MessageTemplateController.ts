@@ -163,7 +163,7 @@ function create_message(message_variables: IMessageTemplate): string {
       default:
         break;
     }
-    console.log('template', JSON.parse(JSON.stringify(template)));
+    // console.log('template', JSON.parse(JSON.stringify(template)));
   });
   return JSON.stringify(template);
 }
