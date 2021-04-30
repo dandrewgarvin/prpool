@@ -18,7 +18,8 @@
     "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
     "watch-node": "nodemon dist/server.js",
     "watch-test": "npm run test -- --watch",
-    "watch-ts": "tsc -w -p tsconfig.json"
+    "watch-ts": "tsc -w -p tsconfig.json",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "dependencies": {
     "compression": "^1.7.4",
@@ -67,5 +68,6 @@
   },
   "_moduleAliases": {
     "~": "dist"
-  }
+  },
+  "heroku-run-build-script": true
 }
