@@ -4,6 +4,8 @@ import { WebClient, WebAPICallResult } from '@slack/web-api';
 import { create_message } from './MessageTemplateController';
 import { IStatus } from '../types/message_template';
 import { IUser } from '../types/user';
+import { Message } from '../models/message';
+import { User } from '../models/user';
 
 const SLACK_CHANNEL_ID = 'C020HT6E5D3';
 
@@ -40,19 +42,11 @@ const calculateStatusOnCreate = (
 async function createSlackMessage(messageVariables: IMessageTemplate) {
   const web = new WebClient(process.env.SLACK_TOKEN);
 
-  console.log('hello 1:', web);
-
   const status = calculateStatusOnCreate(messageVariables);
-  const author = {}; // TODO: fetch user from authorGithubUsername
-
-  console.log('hello 2:', process.env.SLACK_TOKEN);
+  const author = User.findByGithub(messageVariables.author.github_username);
 
   const mess = create_message(messageVariables);
   const MSG = JSON.parse(mess);
-
-  console.log(mess);
-
-  // MSG.attachments[0].text = "hot mess"
 
   const res = (await web.chat.postMessage({
     text: 'hot mess',
@@ -60,10 +54,8 @@ async function createSlackMessage(messageVariables: IMessageTemplate) {
     attachments: MSG.attachments,
   })) as ChatMessageResult;
 
-  console.log('hello 3:', res);
-
   if (res.ok) {
-    // TODO: persist IMessageTemplate
+    new Message(messageVariables.author, messageVariables).save();
   }
 }
 
@@ -91,7 +83,7 @@ async function deleteSlackMessage(githubID: string) {
   })) as ChatMessageResult;
 
   if (res.ok) {
-    // TODO: delete message from db
+    Message.findByTimestamp(timestamp).delete();
   }
 }
 
