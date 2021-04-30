@@ -4,6 +4,7 @@ interface IReviewerImage {
   image_url: string;
   alt_text: string;
 }
+
 interface IStatus {
   status:
     | 'Awaiting Approval'
@@ -12,6 +13,12 @@ interface IStatus {
     | 'Ready to Merge';
   current_approvals?: number;
   needed_approvals?: number;
+  requested_reviewers: Union<
+    IUser,
+    {
+      review_type: 'Approved' | 'Requested Changes' | 'Pending';
+    }
+  >[];
 }
 export interface IMessageTemplate {
   slack_id: string | null;
