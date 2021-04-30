@@ -1,0 +1,41 @@
+version: 0.2
+
+phases:
+  install:
+    runtime_versions:
+      nodejs: 14
+    commands:
+      - docker login -p $DOCKERHUB_PASSWORD -u alexnelsongcx
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=$${COMMIT_HASH:=latest}
+      - IMAGE_URI="$${REPOSITORY_URI}:$${IMAGE_TAG}"
+      - cp .env.example .env
+      - npm install --silent
+
+  pre_build:
+    commands:
+      - echo running linter...
+      - npm run lint
+      - echo running tests...
+      - npm run test
+  build:
+    commands:
+      - echo build started on `date`
+      - npm run build
+      - echo building the Docker image...
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+
+  post_build:
+    commands:
+      - echo build completed on `date`
+      - echo pushing the Docker images...
+      - echo tagged - $${IMAGE_TAG}
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name":"core-container","imageUri":"%s"}]' $IMAGE_URI > imagedefinitions.json
+
+artifacts:
+  files: imagedefinitions.json

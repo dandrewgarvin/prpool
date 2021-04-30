@@ -1,0 +1,23 @@
+# Docker Compose
+#
+# This file allows you to build peer services so you can run your node app
+# with a postgres, redis, elastic search, etc, supporting services. This
+# allows you to run your entire application stack with one command:
+#
+# docker-compose up
+#
+
+version: '3'
+
+services:
+  app:
+    build: .
+    command: 'npm run debug'
+    environment:
+      NODE_ENV: development
+    env_file: .env
+    volumes:
+      - ./:/usr/src/app:delegated
+    ports:
+      - 3002:3000
+      - 9229:9229
