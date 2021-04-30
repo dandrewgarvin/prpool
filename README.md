@@ -24,6 +24,7 @@ $ cp .env.example .env
 $ docker-compose up
 ```
 
+
 ## Debugging
 
 If you're using VS Code then you can use the built-in debugger. After you have the app running with `docker-compose` then you can start the `Docker: Debugger` in the debugger tab.
