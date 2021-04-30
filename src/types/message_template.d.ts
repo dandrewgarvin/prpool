@@ -4,12 +4,9 @@ interface IReviewerImage {
   image_url: string;
   alt_text: string;
 }
+
 interface IStatus {
-  status:
-    | 'Awaiting Approval'
-    | 'Changes Requested'
-    | 'Merge Blocked'
-    | 'Ready to Merge';
+  status: string;
   current_approvals?: number;
   needed_approvals?: number;
 }

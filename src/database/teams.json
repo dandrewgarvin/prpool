@@ -1,0 +1,50 @@
+[
+  {
+    "id": "Team-1",
+    "name": "Core",
+    "member_ids": [
+      "User-1",
+      "User-4",
+      "User-5",
+      "User-7",
+      "User-8",
+      "User-12"
+    ],
+    "leader_ids": [
+      "User-1"
+    ]
+  },
+  {
+    "id": "Team-2",
+    "name": "Provider",
+    "member_ids": [
+      "User-1",
+      "User-2",
+      "User-3",
+      "User-10",
+      "User-13",
+      "User-16",
+      "User-17"
+    ],
+    "leader_ids": [
+      "User-1",
+      "User-2"
+    ]
+  },
+  {
+    "id": "Team-3",
+    "name": "Customer",
+    "member_ids": [
+      "User-1",
+      "User-6",
+      "User-9",
+      "User-11",
+      "User-14",
+      "User-15"
+    ],
+    "leader_ids": [
+      "User-1",
+      "User-9"
+    ]
+  }
+]
