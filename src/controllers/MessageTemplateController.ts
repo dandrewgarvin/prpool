@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { IMessageTemplate } from '../types/message_template';
-
 const MessageTemplate = `{
   attachments: [
     {
@@ -51,7 +51,6 @@ const MessageTemplate = `{
     }
   ]
 }`;
-
 /**
  * Variables:
  * ||STATUS_COLOR||
@@ -66,13 +65,10 @@ const MessageTemplate = `{
  * ||REQUESTED_REVIEWER_IMAGES||
  * ||REQUESTED_REVIEWER_MENTIONS||
  */
-
 function create_message(message_variables: IMessageTemplate) {
   let template = MessageTemplate;
-
-  Object.keys(message_variables).forEach(key => {
-    const value = message_variables[key as keyof IMessageTemplate];
-
+  Object.keys(message_variables).forEach((key) => {
+    const value = message_variables[key as keyof IMessageTemplate] as any;
     switch (key) {
       case 'id':
         break;
@@ -84,20 +80,14 @@ function create_message(message_variables: IMessageTemplate) {
         break;
       case 'branch_name':
         template = template.replace(/(\|\|BRANCH_NAME\|\|)/g, value);
-
         // attempt to add clubhouse url
         let ch_story = value.match(/ch[0-9]+/g);
-
         if (ch_story && ch_story.length) ch_story = ch_story[0];
-
         ch_story = ch_story ? ch_story.replace('ch', '') : '';
-
-        let ch_string = ch_story
-          ? `*Clubhouse Story:* <https://app.clubhouse.io/beynd/story/${ch_story}|ch${ch_story}>`
+        const ch_string = ch_story
+          ? `*Clubhouse Story:* <https://app.clubhouse.io/beynd/story/${ch_story}%7Cch${ch_story}>`
           : '';
-
         template = template.replace(/(\|\|CH_STORY\|\|)/g, ch_string);
-
         break;
       case 'pr_name':
         template = template.replace(/(\|\|PR_NAME\|\|)/g, value);
@@ -110,89 +100,77 @@ function create_message(message_variables: IMessageTemplate) {
         break;
       case 'current_status':
         let status_string = value.status;
-
         if (value.status === 'Awaiting Approval') {
           status_string = status_string.concat(
             ` (${String(value.current_approvals)}/${String(
-              value.needed_approvals
-            )})`
+              value.needed_approvals,
+            )})`,
           );
         }
-
         template = template.replace(/(\|\|CURRENT_STATUS\|\|)/g, status_string);
-
         const status_colors: any = {
           'Awaiting Approval': '#5f8bfa',
           'Changes Requested': '#fcd303',
           'Merge Blocked': '#d9170d',
           'Ready to Merge': '#36a74f',
         };
-
         template = template.replace(
           /(\|\|STATUS_COLOR\|\|)/g,
-          status_colors[(value.status || 'Awaiting Approval')]
+          status_colors[value.status || 'Awaiting Approval'],
         );
-
         break;
       case 'requested_reviewers':
-        let reviewer_elements = [];
-
+        const reviewer_elements = [];
         // add prefix text to elements
         reviewer_elements.push({
           type: 'mrkdwn',
           text: '*Requested Reviewers:*',
         });
-
         // add reviewer images to elements
-        let reviewer_images = value.map((user: any) => ({
+        const reviewer_images = value.map((user: any) => ({
           type: 'image',
           image_url: user.image,
           alt_text: user.name,
         }));
-
         reviewer_elements.push(...reviewer_images);
-
         // add reviewer mentions to elements
-        let reviewer_mentions = value.map((user: any) => `<@${user.slack_id}>`);
-
+        const reviewer_mentions = value.map(
+          (user: any) => `<@${user.slack_id}>`,
+        );
         reviewer_elements.push({
           type: 'mrkdwn',
           text: `(${reviewer_mentions.join(',')})`,
         });
-
         // update template string
         template = template.replace(
           /(\|\|REQUESTED_REVIEWERS\|\|)/g,
-          JSON.stringify(reviewer_elements).concat(',')
+          JSON.stringify(reviewer_elements).concat(','),
         );
         break;
       case 'dev_notes':
         if (!value) break;
-
-        let notes_substring = value.substring(
+        const notes_substring = value.substring(
           value.lastIndexOf('⇩⇩⇩⇩⇩ DEVELOPER NOTES HERE ⇩⇩⇩⇩⇩') + 32,
-          value.lastIndexOf('⇧⇧⇧⇧⇧ DEVELOPER NOTES HERE ⇧⇧⇧⇧⇧')
+          value.lastIndexOf('⇧⇧⇧⇧⇧ DEVELOPER NOTES HERE ⇧⇧⇧⇧⇧'),
         );
-
         if (notes_substring) {
-          template = template.replace(/(\|\|DEV_NOTES\|\|)/g, notes_substring.trim());
+          template = template.replace(
+            /(\|\|DEV_NOTES\|\|)/g,
+            notes_substring.trim(),
+          );
         }
-
         break;
       default:
         break;
     }
-
     console.log('template', JSON.parse(JSON.stringify(template)));
-
-    return JSON.parse(JSON.stringify(template))
+    return JSON.parse(JSON.stringify(template));
   });
 }
-
 export { create_message };
-
 const test_message: IMessageTemplate = {
-  id: null,
+  slack_id: null,
+  github_id: null,
   author: {
     id: 'User-9',
     slack_id: 'U0103ETH2KS',
@@ -234,16 +212,11 @@ const test_message: IMessageTemplate = {
   ],
   dev_notes: `## New Pull Request
   > The reviewer is not responsible for checking the correctness of this code - only the quality. The reviewer should be checking to make sure the changes make logical sense, that dead code has been removed, that all documentation has been updated (in all forms: readmes, comments, type declarations, etc), and that business requirements are met.
-  
   ## Developer Notes
   > notes about the changes being made. why certain decisions were made (ADR-style notes), things the reviewer should look for, context the reviewer needs to be aware of, etc
-  
   ⇩⇩⇩⇩⇩ DEVELOPER NOTES HERE ⇩⇩⇩⇩⇩
-  
   Configuration for stylelint in hydrogen is not fully complete. There will need to be some specific rules for 'tailwindCSS' that are not yet included. Also, a mock CSS file was included as an example for future reference.
-  
   ⇧⇧⇧⇧⇧ DEVELOPER NOTES HERE ⇧⇧⇧⇧⇧
-  
   ## Developer Checklist
   - [ ] Have you QA'd your work?
   - [ ] Have you linked this change to Clubhouse? See Clubhouse
@@ -251,11 +224,9 @@ const test_message: IMessageTemplate = {
   - [ ] Have sufficient automated tests been added?
   - [ ] Do these changes have a feature flag?
   - [ ] Do these changes meet our Quality Standards?
-  
   ## Reviewer Checklist
   - [ ] Do you understand the changes being made in this PR?
   - [ ] Is there adequate documentation around these changes?
   - [ ] Are there simpler or cleaner modifications that could be made?`,
 };
-
 create_message(test_message);
