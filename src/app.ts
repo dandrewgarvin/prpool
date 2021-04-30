@@ -2,9 +2,9 @@ import express from 'express';
 import compression from 'compression';
 import lusca from 'lusca';
 
-import { health } from '~/controllers/health';
-import handleError from '~/middleware/handle-error';
-import * as settings from '~/config/settings';
+import { health } from './controllers/health';
+import handleError from './middleware/handle-error';
+import * as settings from './config/settings';
 
 const app = express();
 app.set('port', settings.PORT);

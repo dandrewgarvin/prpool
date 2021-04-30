@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 
-import logger from '~/common/logger';
+import logger from '../logger';
 
 export default function (handle: RequestHandler): RequestHandler {
   return async function (req, res, next) {
