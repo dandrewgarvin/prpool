@@ -65,7 +65,7 @@ const MessageTemplate = `{
  * ||REQUESTED_REVIEWER_IMAGES||
  * ||REQUESTED_REVIEWER_MENTIONS||
  */
-function create_message(message_variables: IMessageTemplate) {
+function create_message(message_variables: IMessageTemplate): string {
   let template = MessageTemplate;
   Object.keys(message_variables).forEach((key) => {
     const value = message_variables[key as keyof IMessageTemplate] as any;
@@ -163,9 +163,9 @@ function create_message(message_variables: IMessageTemplate) {
       default:
         break;
     }
-    console.log('template', JSON.parse(JSON.stringify(template)));
-    return JSON.parse(JSON.stringify(template));
+    // console.log('template', JSON.parse(JSON.stringify(template)));
   });
+  return JSON.stringify(template);
 }
 export { create_message };
 const test_message: IMessageTemplate = {
@@ -189,7 +189,7 @@ const test_message: IMessageTemplate = {
     status: 'Awaiting Approval',
     current_approvals: 0,
     needed_approvals: 2,
-  },
+  } as any,
   requested_reviewers: [
     {
       id: 'User-6',
