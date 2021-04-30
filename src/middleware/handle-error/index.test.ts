@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { buildResponse, buildRequest } from '~/../utils/test-helpers';
+import { buildResponse, buildRequest } from '../../../utils/test-helpers';
 import handleErrorBuilder, { HTTPError } from '.';
 
 describe('Middleware:handleError', () => {

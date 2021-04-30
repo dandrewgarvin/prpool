@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 
-import logger from '~/common/logger';
+import logger from '../../common/logger';
 /**
  * List of API examples.
  * @route GET /api

@@ -1,6 +1,6 @@
 import { Request, ErrorRequestHandler } from 'express';
 
-import logger from '~/common/logger';
+import logger from '../../common/logger';
 
 export class HTTPError extends Error {
   status: number;
