@@ -1,0 +1,174 @@
+[
+  {
+    "id": "User-1",
+    "slack_id": "UNLN0CAQ3",
+    "name": "Alex Nelson",
+    "github_username": "walexnelson",
+    "image": "https://avatars.slack-edge.com/2019-10-01/768755301859_535e6bf40c7245ec89d3_48.jpg",
+    "team_ids": [
+      "Team-1",
+      "Team-2",
+      "Team-3"
+    ]
+  },
+  {
+    "id": "User-2",
+    "slack_id": "U014EFW98PQ",
+    "name": "Alex Doty",
+    "github_username": "agdoty",
+    "image": "https://avatars.slack-edge.com/2021-01-13/1619132185575_b183a297ff9213075928_48.png",
+    "team_ids": [
+      "Team-2"
+    ]
+  },
+  {
+    "id": "User-3",
+    "slack_id": "U01P7UT8R8F",
+    "name": "Andre Araujo",
+    "github_username": "andre-muller",
+    "image": "https://avatars.slack-edge.com/2021-03-01/1792743376983_0d5c9e4d88af90bae798_48.jpg",
+    "team_ids": [
+      "Team-2"
+    ]
+  },
+  {
+    "id": "User-4",
+    "slack_id": "U01DZ2VETK6",
+    "name": "Brennon Schow",
+    "github_username": "brennongs",
+    "image": "https://avatars.slack-edge.com/2021-02-06/1729071678500_ed406729cb16959187f4_48.png",
+    "team_ids": [
+      "Team-1"
+    ]
+  },
+  {
+    "id": "User-5",
+    "slack_id": "U01PNN7AKS6",
+    "name": "Creed Naylor",
+    "github_username": "creednaylor",
+    "image": "https://secure.gravatar.com/avatar/d4ce0cb269700984622929d043e0245e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0007-48.png",
+    "team_ids": [
+      "Team-1"
+    ]
+  },
+  {
+    "id": "User-6",
+    "slack_id": "U01DC5R0K2T",
+    "name": "Andrew Garvin",
+    "github_username": "dandrewgarvin",
+    "image": "https://avatars.slack-edge.com/2020-11-02/1468419455349_1bbcf3da609e9d231f31_48.jpg",
+    "team_ids": [
+      "Team-3"
+    ]
+  },
+  {
+    "id": "User-7",
+    "slack_id": "URCM7K64U",
+    "name": "Eduardo Macetas",
+    "github_username": "eduardomacetas",
+    "image": "https://avatars.slack-edge.com/2019-12-17/877199136693_4304dd5f6fbc7873415c_48.jpg",
+    "team_ids": [
+      "Team-1"
+    ]
+  },
+  {
+    "id": "User-8",
+    "slack_id": "URFBCR0QN",
+    "name": "Grimaldo Davila",
+    "github_username": "GJDavila",
+    "image": "https://avatars.slack-edge.com/2019-12-06/862762968100_21913e0f15a3000c9e28_48.jpg",
+    "team_ids": [
+      "Team-1"
+    ]
+  },
+  {
+    "id": "User-9",
+    "slack_id": "U0103ETH2KS",
+    "name": "Ian Clawson",
+    "github_username": "ianclawson",
+    "image": "https://avatars.slack-edge.com/2021-01-04/1634938408368_333c086d47acc4372c4e_48.png",
+    "team_ids": [
+      "Team-3"
+    ]
+  },
+  {
+    "id": "User-10",
+    "slack_id": "U011UBRBTT9",
+    "name": "Jair Huaman",
+    "github_username": "jair-ravn",
+    "image": "https://avatars.slack-edge.com/2020-04-21/1083806695972_4c82a28bd1f7a26991f2_48.jpg",
+    "team_ids": [
+      "Team-2"
+    ]
+  },
+  {
+    "id": "User-11",
+    "slack_id": "U010A317RFX",
+    "name": "Juan Gomez",
+    "github_username": "juan-ravn",
+    "image": "https://avatars.slack-edge.com/2020-03-24/1011029104098_beb434f501b1883ac10f_48.jpg",
+    "team_ids": [
+      "Team-3"
+    ]
+  },
+  {
+    "id": "User-12",
+    "slack_id": "U01232FEYM9",
+    "name": "Kekoa Wilson",
+    "github_username": "kekoawilson",
+    "image": "https://avatars.slack-edge.com/2020-04-20/1074480793042_4fdf67dde3cc00319f72_48.jpg",
+    "team_ids": [
+      "Team-1"
+    ]
+  },
+  {
+    "id": "User-13",
+    "slack_id": "U01CS3H8WT0",
+    "name": "Kyle Wright",
+    "github_username": "kylejw2",
+    "image": "https://avatars.slack-edge.com/2021-01-13/1619079614519_e8bb0fe68272f22eb15f_48.jpg",
+    "team_ids": [
+      "Team-2"
+    ]
+  },
+  {
+    "id": "User-14",
+    "slack_id": "UR5703PUZ",
+    "name": "Luisa Gonzales",
+    "github_username": "luisaGonzales",
+    "image": "https://avatars.slack-edge.com/2019-12-06/863239837397_71e344637a4842e504d6_48.jpg",
+    "team_ids": [
+      "Team-3"
+    ]
+  },
+  {
+    "id": "User-15",
+    "slack_id": "U01HUBWJNUV",
+    "name": "Seth Barton",
+    "github_username": "sethwbarton",
+    "image": "https://avatars.slack-edge.com/2021-01-15/1648281548388_acff63f0073c2790209a_48.jpg",
+    "team_ids": [
+      "Team-3"
+    ]
+  },
+  {
+    "id": "User-16",
+    "slack_id": "URFBCNU06",
+    "name": "Steven Heffner",
+    "github_username": "stevenheffner",
+    "image": "https://avatars.slack-edge.com/2020-05-11/1117908710915_88c671e59f361a3cf93c_48.png",
+    "team_ids": [
+      "Team-2"
+    ]
+  },
+  {
+    "id": "User-17",
+    "slack_id": "U01JS7J3HEJ",
+    "name": "Timothy Mitchell",
+    "github_username": "timothydm42",
+    "image": "https://avatars.slack-edge.com/2021-01-19/1675757446400_68b807ed809d518cd4bc_48.jpg",
+    "team_ids": [
+      "Team-2"
+    ]
+  }
+]
