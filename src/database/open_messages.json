@@ -19,7 +19,8 @@
       "pr_url": "",
       "pr_number": 8880,
       "current_status": {
-        "status": "Awaiting Approval"
+        "status": "Awaiting Approval",
+        "requested_reviewers": []
       },
       "requested_reviewers": [
         {

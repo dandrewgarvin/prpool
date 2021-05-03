@@ -2,7 +2,7 @@ import { writeFileSync } from 'fs';
 
 import * as users from '../database/users.json';
 
-class User {
+export class User {
   constructor(
     public id: string,
     public slack_id: string,

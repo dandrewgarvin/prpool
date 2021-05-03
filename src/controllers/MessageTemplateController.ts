@@ -1,53 +1,53 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { IMessageTemplate } from '../types/message_template';
 const MessageTemplate = `{
-  attachments: [
+  "attachments": [
     {
-      color: '||STATUS_COLOR||',
-      blocks: [
+      "color": "||STATUS_COLOR||",
+      "blocks": [
         {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text:
-              'A *Pull Request (<||PR_URL|||||PR_NUMBER||>)* has been opened by *||AUTHOR||* in \`||REPO_NAME||\`\n\n*Name:* \`||PR_NAME||\`\n\n*Branch:* \`||BRANCH_NAME||\`\n||CH_STORY||\n\n*Developer Notes:*\n\n||DEV_NOTES||',
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text":
+              "A *Pull Request (<||PR_URL|||||PR_NUMBER||>)* has been opened by *||AUTHOR||* in \`||REPO_NAME||\`\\n\\n*Name:* \`||PR_NAME||\`\\n\\n*Branch:* \`||BRANCH_NAME||\`\\n||CH_STORY||\\n\\n*Developer Notes:*\\n\\n||DEV_NOTES||"
           },
-          accessory: {
-            type: 'image',
-            image_url: 'https://avatars.githubusercontent.com/u/37122927?s=400&v=4',
-            alt_text: 'GuideCX',
-          },
+          "accessory": {
+            "type": "image",
+            "image_url": "https://avatars.githubusercontent.com/u/37122927?s=400&v=4",
+            "alt_text": "GuideCX"
+          }
         },
         {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: '*Current Status:* ||CURRENT_STATUS||',
-          },
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Current Status:* ||CURRENT_STATUS||"
+          }
         },
         {
-          type: 'context',
-          elements: ||REQUESTED_REVIEWERS||
+          "type": "context",
+          "elements": ||REQUESTED_REVIEWERS||
         },
         {
-          type: 'divider',
+          "type": "divider"
         },
         {
-          type: 'actions',
-          elements: [
+          "type": "actions",
+          "elements": [
             {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: 'Review Changes Now',
-                emoji: true,
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "Review Changes Now",
+                "emoji": true
               },
-              value: 'open_pr_url',
-              url: '||PR_URL||',
-            },
-          ],
-        },
-      ],
+              "value": "open_pr_url",
+              "url": "||PR_URL||"
+            }
+          ]
+        }
+      ]
     }
   ]
 }`;
@@ -144,7 +144,7 @@ function create_message(message_variables: IMessageTemplate): string {
         // update template string
         template = template.replace(
           /(\|\|REQUESTED_REVIEWERS\|\|)/g,
-          JSON.stringify(reviewer_elements).concat(','),
+          JSON.stringify(reviewer_elements).concat(',').replace(/,\s*$/, ''),
         );
         break;
       case 'dev_notes':
