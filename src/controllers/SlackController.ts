@@ -42,20 +42,21 @@ const calculateStatusOnCreate = (
 async function createSlackMessage(messageVariables: IMessageTemplate) {
   const web = new WebClient(process.env.SLACK_TOKEN);
 
-  const status = calculateStatusOnCreate(messageVariables);
-  const author = User.findByGithub(messageVariables.author.github_username);
+  // const status = calculateStatusOnCreate(messageVariables);
+  // const author = User.findByGithub(messageVariables.author.github_username);
 
   const mess = create_message(messageVariables);
-  const MSG = JSON.parse(mess);
+
+  const MSG = JSON.parse(JSON.parse(mess));
 
   const res = (await web.chat.postMessage({
-    text: 'hot mess',
+    text: 'test mess',
     channel: SLACK_CHANNEL_ID,
     attachments: MSG.attachments,
   })) as ChatMessageResult;
 
   if (res.ok) {
-    new Message(messageVariables.author, messageVariables).save();
+    // new Message(messageVariables.author, messageVariables).save();
   }
 }
 
@@ -83,7 +84,7 @@ async function deleteSlackMessage(githubID: string) {
   })) as ChatMessageResult;
 
   if (res.ok) {
-    Message.findByTimestamp(timestamp).delete();
+    // Message.findByTimestamp(timestamp).delete();
   }
 }
 
