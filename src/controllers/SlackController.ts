@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { IMessageTemplate } from '../types/message_template';
 import { WebClient, WebAPICallResult } from '@slack/web-api';
 // eslint-disable-next-line @typescript-eslint/camelcase
@@ -50,13 +51,13 @@ async function createSlackMessage(messageVariables: IMessageTemplate) {
   const MSG = JSON.parse(JSON.parse(mess));
 
   const res = (await web.chat.postMessage({
-    text: 'test mess',
+    text: `${messageVariables.author.name} has opened a new PR`,
     channel: SLACK_CHANNEL_ID,
     attachments: MSG.attachments,
   })) as ChatMessageResult;
 
   if (res.ok) {
-    // new Message(messageVariables.author, messageVariables).save();
+    new Message(messageVariables, { slack_timestamp: res.ts }).save();
   }
 }
 
@@ -74,9 +75,13 @@ async function createSlackMessage(messageVariables: IMessageTemplate) {
 //     }
 // }
 
-async function deleteSlackMessage(githubID: string) {
+async function deleteSlackMessage(githubID: number) {
   const web = new WebClient(process.env.SLACK_TOKEN);
-  const timestamp = ''; // TODO: fetch timestamp/id of message via githubId
+  const message = Message.findByGithub(githubID) as any;
+
+  if (!message || !message.message) return;
+
+  const timestamp = message.message.slack_id;
 
   const res = (await web.chat.delete({
     channel: SLACK_CHANNEL_ID,
@@ -84,7 +89,7 @@ async function deleteSlackMessage(githubID: string) {
   })) as ChatMessageResult;
 
   if (res.ok) {
-    // Message.findByTimestamp(timestamp).delete();
+    Message.findByTimestamp(timestamp).delete();
   }
 }
 

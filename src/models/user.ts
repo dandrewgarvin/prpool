@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs';
 
-import * as users from '../database/users.json';
+import { default as users } from '../database/users.json';
 
 export class User {
   constructor(

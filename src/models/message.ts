@@ -1,81 +1,65 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { writeFileSync } from 'fs';
 
-import { IUser } from '../types/user';
-import { IStatus } from '../types/message_template';
+import { IMessageTemplate } from '../types/message_template';
 import { default as messages } from '../database/open_messages.json';
 
-const path = `${__dirname}/../database/open_messages.json`;
-
-interface MessageVariables {
-  slack_id: string | null;
-  github_id: string | null;
-  repo_name: string;
-  branch_name: string;
-  pr_name: string;
-  pr_number: number;
-  pr_url: string;
-  current_status: IStatus;
-  requested_reviewers: IUser[];
-  dev_notes?: string;
-}
-
-interface MessageId {
-  message_id: string;
-  slack_id: string;
-  github_id: string;
-}
+const path = `./src/database/open_messages.json`;
 
 export class Message {
-  id: MessageId;
+  message: IMessageTemplate;
 
   constructor(
-    public author: IUser,
-    public variables: MessageVariables,
-    id?: MessageId,
+    private variables: IMessageTemplate,
+    private config?: { slack_timestamp: string },
   ) {
-    this.id = id;
+    this.message = variables;
 
-    if (!id) messages.push(this);
+    if (config) {
+      this.message.slack_id = config.slack_timestamp;
+    }
+
+    messages.push(this.message as any);
 
     return this;
   }
 
-  static findByGithub(id: string): Message {
-    const message = messages.find((m) => m.id.github_id === id);
+  static findByGithub(id: number): Message {
+    const message = messages.find((m) => m.github_id === id);
 
-    return new Message(message.author, message.variables, message.id);
+    return new Message(message as any);
   }
 
-  static findBySlack(id: string): Message {
-    const message = messages.find((m) => m.id.slack_id === id);
+  // static findBySlack(id: string): Message {
+  //   const message = messages.find((m) => m.id.slack_id === id);
 
-    return new Message(message.author, message.variables, message.id);
-  }
+  //   return new Message(message.author, message.variables, message.id);
+  // }
 
   static findByTimestamp(id: string): Message {
-    const message = messages.find((m) => m.id.message_id === id);
+    const message = messages.find((m) => m.slack_id === id);
 
-    return new Message(message.author, message.variables, message.id);
+    return new Message(message as any);
   }
 
-  update(id?: MessageId, variables?: MessageVariables): Message {
-    const index = messages.findIndex(
-      (m) => m.id.message_id === this.id.message_id,
-    );
+  // update(id?: MessageId, variables?: MessageVariables): Message {
+  //   const index = messages.findIndex(
+  //     (m) => m.id.message_id === this.id.message_id,
+  //   );
 
-    if (variables) this.variables = variables;
-    if (id) this.id = id;
+  //   if (variables) this.variables = variables;
+  //   if (id) this.id = id;
 
-    messages[index] = this;
+  //   messages[index] = this;
 
-    this.save();
+  //   this.save();
 
-    return this;
-  }
+  //   return this;
+  // }
 
   delete(): Message {
     const index = messages.findIndex(
-      (m) => m.id.message_id === this.id.message_id,
+      (m) => m.slack_id === this.message.slack_id,
     );
 
     messages.splice(index, 1);
