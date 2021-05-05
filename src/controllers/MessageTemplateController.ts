@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { IMessageTemplate } from '../types/message_template';
+
 const MessageTemplate = `{
   "attachments": [
     {
@@ -168,65 +169,65 @@ function create_message(message_variables: IMessageTemplate): string {
   return JSON.stringify(template);
 }
 export { create_message };
-const test_message: IMessageTemplate = {
-  slack_id: null,
-  github_id: null,
-  author: {
-    id: 'User-9',
-    slack_id: 'U0103ETH2KS',
-    name: 'Ian Clawson',
-    github_username: 'ianclawson',
-    image:
-      'https://avatars.slack-edge.com/2021-01-04/1634938408368_333c086d47acc4372c4e_48.png',
-    team_ids: ['Team-3'],
-  },
-  repo_name: 'web.core',
-  branch_name: 'chore/ch2978/shared-components-1-of-2',
-  pr_name: 'chore(2978): TS conversion shared components 1 of 2',
-  pr_number: 1722,
-  pr_url: 'https://google.com',
-  current_status: {
-    status: 'Awaiting Approval',
-    current_approvals: 0,
-    needed_approvals: 2,
-  } as any,
-  requested_reviewers: [
-    {
-      id: 'User-6',
-      slack_id: 'U01DC5R0K2T',
-      name: 'Andrew Garvin',
-      github_username: 'dandrewgarvin',
-      image:
-        'https://avatars.slack-edge.com/2020-11-02/1468419455349_1bbcf3da609e9d231f31_48.jpg',
-      team_ids: ['Team-3'],
-    },
-    {
-      id: 'User-4',
-      slack_id: 'U01DZ2VETK6',
-      name: 'Brennon Schow',
-      github_username: 'brennongs',
-      image:
-        'https://avatars.slack-edge.com/2021-02-06/1729071678500_ed406729cb16959187f4_48.png',
-      team_ids: ['Team-1'],
-    },
-  ],
-  dev_notes: `## New Pull Request
-  > The reviewer is not responsible for checking the correctness of this code - only the quality. The reviewer should be checking to make sure the changes make logical sense, that dead code has been removed, that all documentation has been updated (in all forms: readmes, comments, type declarations, etc), and that business requirements are met.
-  ## Developer Notes
-  > notes about the changes being made. why certain decisions were made (ADR-style notes), things the reviewer should look for, context the reviewer needs to be aware of, etc
-  ⇩⇩⇩⇩⇩ DEVELOPER NOTES HERE ⇩⇩⇩⇩⇩
-  Configuration for stylelint in hydrogen is not fully complete. There will need to be some specific rules for 'tailwindCSS' that are not yet included. Also, a mock CSS file was included as an example for future reference.
-  ⇧⇧⇧⇧⇧ DEVELOPER NOTES HERE ⇧⇧⇧⇧⇧
-  ## Developer Checklist
-  - [ ] Have you QA'd your work?
-  - [ ] Have you linked this change to Clubhouse? See Clubhouse
-  - [ ] Have you named your PR correctly by type of change and included the story number? ie feat, bugfix, chore
-  - [ ] Have sufficient automated tests been added?
-  - [ ] Do these changes have a feature flag?
-  - [ ] Do these changes meet our Quality Standards?
-  ## Reviewer Checklist
-  - [ ] Do you understand the changes being made in this PR?
-  - [ ] Is there adequate documentation around these changes?
-  - [ ] Are there simpler or cleaner modifications that could be made?`,
-};
-create_message(test_message);
+// const test_message: IMessageTemplate = {
+//   slack_id: null,
+//   github_id: null,
+//   author: {
+//     id: 'User-9',
+//     slack_id: 'U0103ETH2KS',
+//     name: 'Ian Clawson',
+//     github_username: 'ianclawson',
+//     image:
+//       'https://avatars.slack-edge.com/2021-01-04/1634938408368_333c086d47acc4372c4e_48.png',
+//     team_ids: ['Team-3'],
+//   },
+//   repo_name: 'web.core',
+//   branch_name: 'chore/ch2978/shared-components-1-of-2',
+//   pr_name: 'chore(2978): TS conversion shared components 1 of 2',
+//   pr_number: 1722,
+//   pr_url: 'https://google.com',
+//   current_status: {
+//     status: 'Awaiting Approval',
+//     current_approvals: 0,
+//     needed_approvals: 2,
+//   } as any,
+//   requested_reviewers: [
+//     {
+//       id: 'User-6',
+//       slack_id: 'U01DC5R0K2T',
+//       name: 'Andrew Garvin',
+//       github_username: 'dandrewgarvin',
+//       image:
+//         'https://avatars.slack-edge.com/2020-11-02/1468419455349_1bbcf3da609e9d231f31_48.jpg',
+//       team_ids: ['Team-3'],
+//     },
+//     {
+//       id: 'User-4',
+//       slack_id: 'U01DZ2VETK6',
+//       name: 'Brennon Schow',
+//       github_username: 'brennongs',
+//       image:
+//         'https://avatars.slack-edge.com/2021-02-06/1729071678500_ed406729cb16959187f4_48.png',
+//       team_ids: ['Team-1'],
+//     },
+//   ],
+//   dev_notes: `## New Pull Request
+//   > The reviewer is not responsible for checking the correctness of this code - only the quality. The reviewer should be checking to make sure the changes make logical sense, that dead code has been removed, that all documentation has been updated (in all forms: readmes, comments, type declarations, etc), and that business requirements are met.
+//   ## Developer Notes
+//   > notes about the changes being made. why certain decisions were made (ADR-style notes), things the reviewer should look for, context the reviewer needs to be aware of, etc
+//   ⇩⇩⇩⇩⇩ DEVELOPER NOTES HERE ⇩⇩⇩⇩⇩
+//   Configuration for stylelint in hydrogen is not fully complete. There will need to be some specific rules for 'tailwindCSS' that are not yet included. Also, a mock CSS file was included as an example for future reference.
+//   ⇧⇧⇧⇧⇧ DEVELOPER NOTES HERE ⇧⇧⇧⇧⇧
+//   ## Developer Checklist
+//   - [ ] Have you QA'd your work?
+//   - [ ] Have you linked this change to Clubhouse? See Clubhouse
+//   - [ ] Have you named your PR correctly by type of change and included the story number? ie feat, bugfix, chore
+//   - [ ] Have sufficient automated tests been added?
+//   - [ ] Do these changes have a feature flag?
+//   - [ ] Do these changes meet our Quality Standards?
+//   ## Reviewer Checklist
+//   - [ ] Do you understand the changes being made in this PR?
+//   - [ ] Is there adequate documentation around these changes?
+//   - [ ] Are there simpler or cleaner modifications that could be made?`,
+// };
+// create_message(test_message);
