@@ -18,7 +18,7 @@ interface IStatus {
 }
 export interface IMessageTemplate {
   slack_id: string | null;
-  github_id: string | null;
+  github_id: number | null;
   author: IUser;
   repo_name: string;
   branch_name: string;
