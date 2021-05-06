@@ -4,14 +4,14 @@ import { writeFileSync } from 'fs';
 import { IMessageTemplate } from '../types/message_template';
 import { default as messages } from '../database/open_messages.json';
 
-const path = `./src/database/open_messages.json`;
+const path = `./dist/database/open_messages.json`;
 
 export class Message {
   message: IMessageTemplate;
 
   constructor(
     private variables: IMessageTemplate,
-    private config?: { slack_timestamp: string },
+    private config?: { slack_timestamp?: string; alreadyExists?: boolean },
   ) {
     this.message = variables;
 
@@ -19,15 +19,19 @@ export class Message {
       this.message.slack_id = config.slack_timestamp;
     }
 
-    messages.push(this.message as any);
+    if (!config.alreadyExists) messages.push(this.message as any);
 
     return this;
   }
 
-  static findByGithub(id: number): Message {
+  static findByGithub(id: number): any {
     const message = messages.find((m) => m.github_id === id);
 
-    return new Message(message as any);
+    return message;
+
+    // console.log('findByGithub:::', message)
+
+    // return new Message(message as any, { alreadyExists: true });
   }
 
   // static findBySlack(id: string): Message {
@@ -39,7 +43,7 @@ export class Message {
   static findByTimestamp(id: string): Message {
     const message = messages.find((m) => m.slack_id === id);
 
-    return new Message(message as any);
+    return new Message(message as any, { alreadyExists: true });
   }
 
   // update(id?: MessageId, variables?: MessageVariables): Message {

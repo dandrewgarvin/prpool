@@ -4,7 +4,9 @@ import compression from 'compression';
 import lusca from 'lusca';
 
 import { health } from './controllers/health';
-import { test } from './controllers/test';
+import { testcreate } from './controllers/testcreate';
+import { testupdate } from './controllers/testupdate';
+import { testdelete } from './controllers/testdelete';
 import handleError from './middleware/handle-error';
 import * as settings from './config/settings';
 console.log('health', health);
@@ -13,6 +15,7 @@ import { User } from './models/user';
 
 import {
   createSlackMessage,
+  updateSlackMessage,
   deleteSlackMessage,
 } from './controllers/SlackController';
 
@@ -26,7 +29,9 @@ app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 
 app.get('/health', health);
-app.get('/test', test);
+app.get('/create', testcreate);
+app.get('/update', testupdate);
+app.get('/delete', testdelete);
 app.post('/github', async (request, response) => {
   console.log('request.body', request.body);
   const {
@@ -114,6 +119,22 @@ app.post('/github', async (request, response) => {
     //   github_id: pull_request.id
     // })
     // return response.send(200)
+  }
+
+  if (
+    [
+      'assigned',
+      'unassigned',
+      'review_requested',
+      'review_request_removed',
+      'ready_for_review',
+      'converted_to_draft',
+      'edited',
+      'submitted',
+      'dismissed',
+    ].includes(action)
+  ) {
+    await updateSlackMessage(formatted_message_object);
   }
 
   if (['opened', 'reopened'].includes(action)) {
