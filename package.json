@@ -23,7 +23,7 @@
     "heroku-postbuild": "npm run build-ts"
   },
   "dependencies": {
-    "@slack/web-api": "^6.1.0",
+    "@slack/web-api": "^6.7.2",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
