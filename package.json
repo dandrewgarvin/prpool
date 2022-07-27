@@ -29,7 +29,7 @@
     "express": "^4.17.1",
     "lusca": "^1.6.1",
     "module-alias": "^2.2.2",
-    "winston": "^3.2.1"
+    "winston": "^3.8.1"
   },
   "devDependencies": {
     "@types/compression": "^1.0.1",
