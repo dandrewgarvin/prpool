@@ -25,7 +25,7 @@
   "dependencies": {
     "@slack/web-api": "^6.1.0",
     "compression": "^1.7.4",
-    "dotenv": "^8.2.0",
+    "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "lusca": "^1.6.1",
     "module-alias": "^2.2.2",
